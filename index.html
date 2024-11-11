@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Richard Yang">
+    <title>Calculator</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <h1>Calculator</h1>
+    <script>
+        while (true) {
+            let numbers = [];
+
+            while (true) {
+                let input = prompt("Enter a number:");
+                if (parseFloat(input).toString() == input) {
+                    numbers.push(parseFloat(input));
+                    moreNumbers = prompt(`You have entered ${numbers.length} number(s). Do you want to enter another number y/n?`).toLowerCase();
+                    if (moreNumbers != "y") {
+                        break;
+                    }
+                }
+                else {
+                    alert("Please enter a valid number.");
+                }
+            }
+
+            if (numbers.length > 0) {
+                let operation = prompt("Enter an operation (+ for add, - for subtract, * for multiply, / for divide):").trim();
+                let result;
+
+                switch (operation) {
+                    case "+":
+                        result = 0;
+                        for (let number of numbers) {
+                            result += number;
+                        }
+                        break;
+                    case "-":
+                        result = numbers[0];
+                        numbers.shift();
+                        for (let number of numbers) {
+                            result -= number;
+                        }
+                        break;
+                    case "*":
+                        result = 1;
+                        for (let number of numbers) {
+                            result *= number;
+                        }
+                        break;
+                    case "/":
+                        if (numbers.length > 2) {
+                            alert("Division can only be performed on two numbers.");
+                            continue;
+                        }
+                        result = numbers[0] / numbers[1];
+                        break;
+                    default:
+                        alert("Invalid operation.");
+                        continue;
+                }
+
+                alert(`The result of the operation is ${result}. You entered ${numbers.length} number(s).`);
+            }
+
+            if (prompt("Do you want to perform another calculation y/n?").toLowerCase() != "y") {
+                alert("Thank you for using the calculator. Have a great day!");
+                break;
+            }
+            else {
+                continue;
+            }
+        }
+    </script>
+</body>
+
+</html>
